@@ -4,5 +4,6 @@ export default function GameComponent() {
       <h2>{gameName}</h2>
       <p>{gameDescription}</p>
     </div>
+    // this is a comment
   );
 }
