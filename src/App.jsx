@@ -4,7 +4,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div>library?</div>
+      <div className="h-24 w-15 bg-red-500">library?</div>
       <main>game components</main>
     </>
   );
