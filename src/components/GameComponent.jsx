@@ -6,7 +6,7 @@ export default function GameComponent() {
     <div>
       {games.map((game) => {
         return (
-          <div className="bg-gray-300 border-4 p-3 pb-10 m-2">
+          <div key={game.id} className="bg-gray-300 border-4 p-3 pb-10 m-2">
             <h1 className="m-1">{game.gameName}</h1>
             <p className="m-1">Released: {game.releaseDate}</p>
             <p>{game.gameDescription}</p>
