@@ -12,7 +12,7 @@ export default function GameInteractiveComponent() {
   }
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mt-3">
         <LikeButton />
         <ReviewButton isReviewing={isReviewing} onClick={handleReviewButton} />
       </div>

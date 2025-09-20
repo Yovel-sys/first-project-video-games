@@ -7,6 +7,7 @@ export default function ReviewComponent({ isReviewing }) {
   if (isReviewing) {
     reviewWindow = (
       <input
+        className="border-1"
         type="text"
         placeholder="Write your review here"
         value={reviewText}
