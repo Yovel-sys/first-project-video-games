@@ -1,16 +1,22 @@
 import { useState } from "react";
 import LikeButton from "./LikeButton";
-import ReviewButtonComponent from "./ReviewButtonComponent";
+import ReviewButton from "./ReviewButton";
 import ReviewComponent from "./ReviewComponent";
 
 export default function GameInteractiveComponent() {
+  const [isReviewing, setIsReviewing] = useState(false);
+
+  function handleReviewButton() {
+    setIsReviewing((reviewing) => !reviewing);
+    console.log(isReviewing);
+  }
   return (
     <>
       <div className="flex gap-2">
         <LikeButton />
-        <ReviewButtonComponent />
+        <ReviewButton isReviewing={isReviewing} onClick={handleReviewButton} />
       </div>
-      <ReviewComponent />
+      <ReviewComponent isReviewing={isReviewing} />
     </>
   );
 }
