@@ -1,8 +1,9 @@
 import { games } from "../data";
 import GameInteractiveComponent from "./GameInteractiveComponent";
 import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
+import { useState } from "react";
 
-export default function GameComponent() {
+export default function GameComponent({ isliked, handleLike }) {
   return (
     <div>
       {games.map((game) => {
@@ -23,8 +24,10 @@ export default function GameComponent() {
                 <p>{game.gameDescription}</p>
               </div>
             </div>
-
-            <GameInteractiveComponent />
+            <GameInteractiveComponent
+              isliked={isliked}
+              handleLike={handleLike}
+            />
           </div>
         );
       })}
