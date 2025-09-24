@@ -1,8 +1,8 @@
-import { useState } from "react";
-
-export default function ReviewComponent({ isReviewing }) {
-  const [reviewText, setReviewText] = useState("");
-
+export default function ReviewComponent({
+  isReviewing,
+  handleReviewText,
+  reviewText,
+}) {
   return (
     <>
       {isReviewing ? (
@@ -11,7 +11,7 @@ export default function ReviewComponent({ isReviewing }) {
           type="text"
           placeholder="Write your review here"
           value={reviewText}
-          onChange={(event) => setReviewText(event.target.value)}
+          onChange={handleReviewText}
         />
       ) : (
         <span>{reviewText}</span>

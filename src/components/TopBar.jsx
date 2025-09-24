@@ -1,7 +1,7 @@
-export default function TopBar() {
+export default function TopBar({ likeCount }) {
   return (
-    <div className="h-9 w-full bg-gray-500 opacity-60">
-      <div></div>
+    <div className="fixed h-10 w-full bg-gray-700 text-white text-2xl">
+      <div className="flex mr-4.5 items-end justify-end">{likeCount}♥︎</div>
     </div>
   );
 }
