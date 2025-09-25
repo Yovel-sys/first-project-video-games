@@ -1,8 +1,14 @@
-import { games } from "../data";
 import GameInteractiveComponent from "./GameInteractiveComponent";
 import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
 
-export default function GameComponent() {
+export default function GameComponent({
+  handleLike,
+  games,
+  reviewText,
+  isReviewing,
+  handleReviewButton,
+  handleReviewText,
+}) {
   return (
     <div>
       {games.map((game) => {
@@ -23,8 +29,16 @@ export default function GameComponent() {
                 <p>{game.gameDescription}</p>
               </div>
             </div>
-
-            <GameInteractiveComponent />
+            <GameInteractiveComponent
+              onLike={() => {
+                handleLike(game.id);
+              }}
+              isLiked={game.isLiked}
+              isReviewing={isReviewing}
+              handleReviewButton={handleReviewButton}
+              reviewText={reviewText}
+              handleReviewText={handleReviewText}
+            />
           </div>
         );
       })}
