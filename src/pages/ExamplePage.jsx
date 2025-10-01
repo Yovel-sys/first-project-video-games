@@ -1,3 +1,3 @@
 export default function ExamplePage() {
-  return <div>Example Page</div>;
+  return <div className="bg-white">Example Page</div>;
 }

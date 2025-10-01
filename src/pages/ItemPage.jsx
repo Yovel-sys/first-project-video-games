@@ -1,3 +1,3 @@
 export default function ItemPage() {
-  return <div>Item Page</div>;
+  return <div className="bg-white">Item Page</div>;
 }

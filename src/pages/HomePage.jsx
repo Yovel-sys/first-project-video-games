@@ -4,6 +4,7 @@ import GameComponent from "../components/GameComponent";
 import { Header } from "../components/Header";
 import TopBar from "../components/TopBar";
 import { games } from "../data";
+
 const initialAllGAmes = () => {
   const gamesFromLS = localStorage.getItem("allMyGames");
   if (gamesFromLS) {
