@@ -1,3 +1,7 @@
+import { useParams } from "react-router";
+
 export default function ItemPage() {
-  return <div className="bg-white">Item Page</div>;
+  const { id } = useParams();
+  console.log(id);
+  return <div className="bg-white">Item Page for item {id}</div>;
 }
