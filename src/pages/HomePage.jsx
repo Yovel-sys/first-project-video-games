@@ -4,6 +4,8 @@ import GameComponent from "../components/GameComponent";
 import { Header } from "../components/Header";
 import TopBar from "../components/TopBar";
 import { games } from "../data";
+import NavBarComp from "../components/NavBarComp";
+
 const initialAllGAmes = () => {
   const gamesFromLS = localStorage.getItem("allMyGames");
   if (gamesFromLS) {
@@ -48,6 +50,7 @@ export default function HomePage() {
 
   return (
     <div className="w-screen">
+      <NavBarComp />
       <TopBar likeCount={topBarLikeCount} />
       <Header />
       <div className="h-24 w-15 bg-red-500">library?</div>
