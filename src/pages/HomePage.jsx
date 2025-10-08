@@ -1,10 +1,9 @@
 import { useState } from "react";
 import "../app.css";
-import GameComponent from "../components/GameComponent";
-import { Header } from "../components/Header";
+import GameCard from "../components/GameCard";
+import Header from "../components/Header";
 import TopBar from "../components/TopBar";
 import { games } from "../data";
-import NavBarComp from "../components/NavBarComp";
 
 const initialAllGAmes = () => {
   const gamesFromLS = localStorage.getItem("allMyGames");
@@ -50,11 +49,14 @@ export default function HomePage() {
 
   return (
     <div className="w-screen">
-      <NavBarComp />
       <TopBar likeCount={topBarLikeCount} />
-      <Header />
-      <div className="h-24 w-15 bg-red-500">library?</div>
-      <GameComponent
+      <Header
+        mainHeader={"The Game Library"}
+        seconderyHeader={
+          "Add your favorite games to your library! Hit the like button and the Like button"
+        }
+      />
+      <GameCard
         handleLike={handleLike}
         games={allGames}
         reviewText={reviewText}

@@ -1,7 +1,7 @@
 import GameInteractiveComponent from "./GameInteractiveComponent";
 import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
 
-export default function GameComponent({
+export default function GameCard({
   handleLike,
   games,
   reviewText,
