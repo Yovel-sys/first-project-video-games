@@ -48,22 +48,24 @@ export default function HomePage() {
   }
 
   return (
-    <div className="w-screen">
+    <>
       <TopBar likeCount={topBarLikeCount} />
-      <Header
-        mainHeader={"The Game Library"}
-        seconderyHeader={
-          "Add your favorite games to your library! Hit the like button and the Like button"
-        }
-      />
-      <GameCard
-        handleLike={handleLike}
-        games={allGames}
-        reviewText={reviewText}
-        isReviewing={isReviewing}
-        handleReviewButton={handleReviewButton}
-        handleReviewText={handleReviewText}
-      />
-    </div>
+      <div className="w-screen">
+        <Header
+          mainHeader={"The Game Library"}
+          seconderyHeader={
+            "Add your favorite games to your library! Hit the like button and the Like button"
+          }
+        />
+        <GameCard
+          handleLike={handleLike}
+          games={allGames}
+          reviewText={reviewText}
+          isReviewing={isReviewing}
+          handleReviewButton={handleReviewButton}
+          handleReviewText={handleReviewText}
+        />
+      </div>
+    </>
   );
 }

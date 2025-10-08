@@ -11,11 +11,11 @@ export default function App() {
     <>
       <BrowserRouter>
         <div className="fixed top-0 w-full z-10 text-white text-xl bg-gray-900 opacity-80">
-          <Link className="m-4" to={"/"}>
+          <Link className="ml-4 mr-4" to={"/"}>
             Home Page
           </Link>
           |
-          <Link className="m-4" to={"/library"}>
+          <Link className="ml-4 mr-4" to={"/library"}>
             My Library
           </Link>
         </div>
