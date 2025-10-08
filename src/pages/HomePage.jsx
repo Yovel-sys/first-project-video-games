@@ -5,39 +5,27 @@ import Header from "../components/Header";
 import TopBar from "../components/TopBar";
 import { games } from "../data";
 
-const initialAllGAmes = () => {
-  const gamesFromLS = localStorage.getItem("allMyGames");
-  if (gamesFromLS) {
-    return JSON.parse(gamesFromLS);
-  }
-  return games;
-};
-const saveGamesToLS = (gm) => {
-  localStorage.setItem("allMyGames", JSON.stringify(gm));
-};
+export default function HomePage(allGames) {
+  // const [topBarLikeCount, setTopBarLikeCount] = useState(0);
 
-export default function HomePage() {
-  const [topBarLikeCount, setTopBarLikeCount] = useState(0);
-
-  const [allGames, setAllGames] = useState(initialAllGAmes());
-  function handleLike(id) {
-    const newLikedGames = allGames.map((game) => {
-      if (game.id === id) {
-        return { ...game, isLiked: !game.isLiked };
-      }
-      return game;
-    });
-    setAllGames(newLikedGames);
-    saveGamesToLS(newLikedGames);
-    const likeCount = newLikedGames.reduce((count, game) => {
-      if (game.isLiked) {
-        return count + 1;
-      }
-      return count;
-    }, 0);
-    console.log(likeCount);
-    setTopBarLikeCount(likeCount);
-  }
+  // function handleLike(id) {
+  //   const newLikedGames = allGames.map((game) => {
+  //     if (game.id === id) {
+  //       return { ...game, isLiked: !game.isLiked };
+  //     }
+  //     return game;
+  //   });
+  //   setAllGames(newLikedGames);
+  //   saveGamesToLS(newLikedGames);
+  //   const likeCount = newLikedGames.reduce((count, game) => {
+  //     if (game.isLiked) {
+  //       return count + 1;
+  //     }
+  //     return count;
+  //   }, 0);
+  //   console.log(likeCount);
+  //   setTopBarLikeCount(likeCount);
+  // }
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
@@ -49,7 +37,7 @@ export default function HomePage() {
 
   return (
     <>
-      <TopBar likeCount={topBarLikeCount} />
+      <TopBar likeCount="0" />
       <div className="w-screen">
         <Header
           mainHeader={"The Game Library"}
@@ -58,7 +46,7 @@ export default function HomePage() {
           }
         />
         <GameCard
-          handleLike={handleLike}
+          handleLike={1}
           games={allGames}
           reviewText={reviewText}
           isReviewing={isReviewing}

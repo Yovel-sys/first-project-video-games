@@ -9,9 +9,11 @@ export default function GameCard({
   handleReviewButton,
   handleReviewText,
 }) {
+  console.log(typeof games);
+
   return (
     <div>
-      {games.map((game) => {
+      {/* {games.map((game) => {
         return (
           <div
             key={game.id}
@@ -41,7 +43,7 @@ export default function GameCard({
             />
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
