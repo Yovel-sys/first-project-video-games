@@ -1,7 +1,7 @@
 import GameInteractiveComponent from "./GameInteractiveComponent";
 import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
 
-export default function GameCard({
+export default function GamesCards({
   handleLike,
   games,
   reviewText,
@@ -9,11 +9,9 @@ export default function GameCard({
   handleReviewButton,
   handleReviewText,
 }) {
-  console.log(typeof games);
-
   return (
     <div>
-      {/* {games.map((game) => {
+      {games.map((game) => {
         return (
           <div
             key={game.id}
@@ -43,7 +41,7 @@ export default function GameCard({
             />
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 }

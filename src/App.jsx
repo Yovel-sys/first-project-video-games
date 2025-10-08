@@ -22,7 +22,16 @@ const saveGamesToLS = (gm) => {
 export default function App() {
   const [allGames, setAllGames] = useState(initialAllGAmes());
 
-  function handleLike(id) {
+  const initialLikeCount = () => {
+    return initialAllGAmes().reduce(
+      (count, game) => (game.isLiked ? count + 1 : count),
+      0
+    );
+  };
+
+  const [likeCount, setLikeCount] = useState(initialLikeCount());
+
+  function handleLikeWithCount(id) {
     const newLikedGames = allGames.map((game) => {
       if (game.id === id) {
         return { ...game, isLiked: !game.isLiked };
@@ -31,14 +40,15 @@ export default function App() {
     });
     setAllGames(newLikedGames);
     saveGamesToLS(newLikedGames);
-    const likeCount = newLikedGames.reduce((count, game) => {
+
+    const newLikeCount = newLikedGames.reduce((count, game) => {
       if (game.isLiked) {
         return count + 1;
       }
       return count;
     }, 0);
-    console.log(likeCount);
-    setTopBarLikeCount(likeCount);
+    console.log(newLikeCount);
+    setLikeCount(newLikeCount);
   }
   return (
     <>
@@ -49,11 +59,20 @@ export default function App() {
           </Link>
           |
           <Link className="ml-4 mr-4" to={"/library"}>
-            My Library
+            My Library ({likeCount})
           </Link>
         </div>
         <Routes>
-          <Route path="/" element={<HomePage allGames={allGames} />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                allGames={allGames}
+                handleLike={handleLikeWithCount}
+                topBarLikeCount={likeCount}
+              />
+            }
+          />
           <Route path="/library" element={<MyLibrary />} />
 
           <Route path="/item/:id" element={<ItemPage />} />
