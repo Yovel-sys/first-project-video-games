@@ -66,14 +66,10 @@ export default function App() {
           <Route
             path="/"
             element={
-              <HomePage
-                allGames={allGames}
-                handleLike={handleLikeWithCount}
-                topBarLikeCount={likeCount}
-              />
+              <HomePage games={allGames} handleLike={handleLikeWithCount} />
             }
           />
-          <Route path="/library" element={<MyLibrary />} />
+          <Route path="/library" element={<MyLibrary games={allGames} />} />
 
           <Route path="/item/:id" element={<ItemPage />} />
           <Route path="/example" element={<ExamplePage />} />

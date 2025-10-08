@@ -1,5 +1,7 @@
 import Header from "../components/Header";
-export default function MyLibrary() {
+import GameCard from "../components/GameCard";
+
+export default function MyLibrary({ games }) {
   return (
     <>
       <div className="w-screen">
@@ -8,6 +10,11 @@ export default function MyLibrary() {
           seconderyHeader="Games you liked will show here!"
         />
       </div>
+      {games.map((game) => {
+        if (game.isLiked === true) {
+          return <GameCard game={game} />;
+        }
+      })}
     </>
   );
 }

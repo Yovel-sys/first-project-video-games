@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "../app.css";
-import GamesCards from "../components/GamesCards";
+import GameCard from "../components/GameCard";
 import Header from "../components/Header";
 
-export default function HomePage({ allGames, handleLike }) {
+export default function HomePage({ games, handleLike }) {
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
@@ -17,19 +17,24 @@ export default function HomePage({ allGames, handleLike }) {
     <>
       <div className="w-screen">
         <Header
-          mainHeader={"The Game Library"}
+          mainHeader={"The Game Place"}
           seconderyHeader={
-            "Add your favorite games to your library! Hit the like button and the Like button"
+            "Add your favorite games to your library! Hit the like button!"
           }
         />
-        <GamesCards
-          handleLike={handleLike}
-          games={allGames}
-          reviewText={reviewText}
-          isReviewing={isReviewing}
-          handleReviewButton={handleReviewButton}
-          handleReviewText={handleReviewText}
-        />
+
+        {games.map((game) => {
+          return (
+            <GameCard
+              handleLike={handleLike}
+              game={game}
+              reviewText={reviewText}
+              isReviewing={isReviewing}
+              handleReviewButton={handleReviewButton}
+              handleReviewText={handleReviewText}
+            />
+          );
+        })}
       </div>
     </>
   );
