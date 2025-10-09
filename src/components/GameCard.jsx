@@ -10,10 +10,7 @@ export default function GameCard({
   handleReviewText,
 }) {
   return (
-    <div
-      key={game.id}
-      className="bg-gray-300 opacity-70 border-4 p-3 pb-10 m-2"
-    >
+    <div className="bg-gray-300 opacity-70 border-4 p-3 pb-10 m-2">
       <div className="flex items-center">
         <img src={gameImagePlaceolder} alt="" className="h-25 w-20 mr-4" />
         <div>
@@ -22,18 +19,17 @@ export default function GameCard({
           <p>{game.gameDescription}</p>
         </div>
       </div>
-      {handleReviewButton ? (
-        <GameInteractiveComponent
-          onLike={() => {
-            handleLike(game.id);
-          }}
-          isLiked={game.isLiked}
-          isReviewing={isReviewing}
-          handleReviewButton={handleReviewButton}
-          reviewText={reviewText}
-          handleReviewText={handleReviewText}
-        />
-      ) : undefined}
+
+      <GameInteractiveComponent
+        onLike={() => {
+          handleLike(game.id);
+        }}
+        isLiked={game.isLiked}
+        isReviewing={isReviewing}
+        handleReviewButton={handleReviewButton}
+        reviewText={reviewText}
+        handleReviewText={handleReviewText}
+      />
     </div>
   );
 }
