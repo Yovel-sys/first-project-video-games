@@ -10,8 +10,8 @@ export default function GameCard({
   handleReviewText,
 }) {
   return (
-    <div className="bg-gray-300 opacity-70 border-4 p-3 pb-10 m-2">
-      <div className="flex items-center">
+    <div className="flex flex-col h-full w-100 bg-gray-300 opacity-70 border-4 p-3 pb-10 m-2 rounded-2xl">
+      <div className="flex items-start flex-grow mb-4">
         <img src={gameImagePlaceolder} alt="" className="h-25 w-20 mr-4" />
         <div>
           <h1 className="m-1">{game.gameName}</h1>

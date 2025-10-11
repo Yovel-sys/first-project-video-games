@@ -6,6 +6,10 @@ import SearchComp from "../components/SearchComp";
 import gamePlaceLogo1 from "../assets/gamePlaceLogo1.png";
 
 export default function HomePage({ games, handleLike }) {
+  // const [shuffledGames] = useState(() =>
+  //   games.slice().sort(() => Math.random() - 0.5)
+  // );
+
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
@@ -19,7 +23,7 @@ export default function HomePage({ games, handleLike }) {
     setSearchText(event.target.value);
     console.log(searchText);
   }
-  const shuffledGames = games.slice().sort(() => Math.random() - 0.5);
+
   return (
     <>
       <div className="w-screen">
@@ -35,22 +39,24 @@ export default function HomePage({ games, handleLike }) {
           handleSearchText={handleSearchText}
           searchText={searchText}
         />
-
-        {shuffledGames.map((game) => {
-          const lowerCaseGameName = game.gameName.toLowerCase();
-          if (lowerCaseGameName.includes(searchText.toLowerCase()))
-            return (
-              <GameCard
-                key={game.id}
-                handleLike={handleLike}
-                game={game}
-                reviewText={reviewText}
-                isReviewing={isReviewing}
-                handleReviewButton={handleReviewButton}
-                handleReviewText={handleReviewText}
-              />
-            );
-        })}
+        <div className="grid grid-cols-3 gap-4">
+          {games.map((game) => {
+            //{shuffledGames.map((game) => {
+            const lowerCaseGameName = game.gameName.toLowerCase();
+            if (lowerCaseGameName.includes(searchText.toLowerCase()))
+              return (
+                <GameCard
+                  key={game.id}
+                  handleLike={handleLike}
+                  game={game}
+                  reviewText={reviewText}
+                  isReviewing={isReviewing}
+                  handleReviewButton={handleReviewButton}
+                  handleReviewText={handleReviewText}
+                />
+              );
+          })}
+        </div>
       </div>
     </>
   );
