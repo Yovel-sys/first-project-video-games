@@ -4,12 +4,12 @@ import GameCard from "../components/GameCard";
 import Header from "../components/Header";
 import SearchComp from "../components/SearchComp";
 import gamePlaceLogo1 from "../assets/gamePlaceLogo1.png";
+import GameOfTheDay from "../components/GameOfTheDay";
 
 export default function HomePage({ games, handleLike }) {
   // const [shuffledGames] = useState(() =>
   //   games.slice().sort(() => Math.random() - 0.5)
   // );
-
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
@@ -39,6 +39,7 @@ export default function HomePage({ games, handleLike }) {
           handleSearchText={handleSearchText}
           searchText={searchText}
         />
+        <GameOfTheDay games={games} />
         <div className="grid grid-cols-3 gap-4">
           {games.map((game) => {
             //{shuffledGames.map((game) => {
