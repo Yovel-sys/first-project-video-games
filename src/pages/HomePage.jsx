@@ -40,13 +40,13 @@ export default function HomePage({ games, handleLike }) {
           searchText={searchText}
         />
         <GameOfTheDay games={games} />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-wrap justify-center p-3">
           {games.map((game) => {
-            //{shuffledGames.map((game) => {
             const lowerCaseGameName = game.gameName.toLowerCase();
             if (lowerCaseGameName.includes(searchText.toLowerCase()))
               return (
                 <GameCard
+                  className="w-full sm:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)]"
                   key={game.id}
                   handleLike={handleLike}
                   game={game}

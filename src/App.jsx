@@ -5,19 +5,8 @@ import ItemPage from "./pages/ItemPage";
 import { BrowserRouter, Route, Routes, Link } from "react-router";
 import Page404 from "./pages/404Page";
 import MyLibrary from "./pages/MyLibrary";
-import { games } from "./data";
 import { useState } from "react";
-
-const initialAllGAmes = () => {
-  const gamesFromLS = localStorage.getItem("allMyGames");
-  if (gamesFromLS) {
-    return JSON.parse(gamesFromLS);
-  }
-  return games;
-};
-const saveGamesToLS = (gm) => {
-  localStorage.setItem("allMyGames", JSON.stringify(gm));
-};
+import { initialAllGAmes, saveGamesToLS } from "./initialGames";
 
 export default function App() {
   const [allGames, setAllGames] = useState(initialAllGAmes());
@@ -47,6 +36,7 @@ export default function App() {
       }
       return count;
     }, 0);
+    console.log(newLikeCount);
     setLikeCount(newLikeCount);
   }
   return (
