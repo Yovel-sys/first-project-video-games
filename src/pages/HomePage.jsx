@@ -2,42 +2,14 @@ import { useState } from "react";
 import "../app.css";
 import GameCard from "../components/GameCard";
 import Header from "../components/Header";
-import TopBar from "../components/TopBar";
-import { games } from "../data";
+import SearchComp from "../components/SearchComp";
+import gamePlaceLogo1 from "../assets/gamePlaceLogo1.png";
+import GameOfTheDay from "../components/GameOfTheDay";
 
-const initialAllGAmes = () => {
-  const gamesFromLS = localStorage.getItem("allMyGames");
-  if (gamesFromLS) {
-    return JSON.parse(gamesFromLS);
-  }
-  return games;
-};
-const saveGamesToLS = (gm) => {
-  localStorage.setItem("allMyGames", JSON.stringify(gm));
-};
-
-export default function HomePage() {
-  const [topBarLikeCount, setTopBarLikeCount] = useState(0);
-
-  const [allGames, setAllGames] = useState(initialAllGAmes());
-  function handleLike(id) {
-    const newLikedGames = allGames.map((game) => {
-      if (game.id === id) {
-        return { ...game, isLiked: !game.isLiked };
-      }
-      return game;
-    });
-    setAllGames(newLikedGames);
-    saveGamesToLS(newLikedGames);
-    const likeCount = newLikedGames.reduce((count, game) => {
-      if (game.isLiked) {
-        return count + 1;
-      }
-      return count;
-    }, 0);
-    console.log(likeCount);
-    setTopBarLikeCount(likeCount);
-  }
+export default function HomePage({ games, handleLike }) {
+  // const [shuffledGames] = useState(() =>
+  //   games.slice().sort(() => Math.random() - 0.5)
+  // );
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
@@ -46,25 +18,46 @@ export default function HomePage() {
   function handleReviewButton() {
     setIsReviewing((reviewing) => !reviewing);
   }
+  const [searchText, setSearchText] = useState("");
+  function handleSearchText(event) {
+    setSearchText(event.target.value);
+    console.log(searchText);
+  }
 
   return (
     <>
-      <TopBar likeCount={topBarLikeCount} />
       <div className="w-screen">
         <Header
-          mainHeader={"The Game Library"}
+          mainHeader={"The Game Place"}
           seconderyHeader={
-            "Add your favorite games to your library! Hit the like button and the Like button"
+            "Add your favorite games to your library! Hit the like button!"
           }
+          image={gamePlaceLogo1}
         />
-        <GameCard
-          handleLike={handleLike}
-          games={allGames}
-          reviewText={reviewText}
-          isReviewing={isReviewing}
-          handleReviewButton={handleReviewButton}
-          handleReviewText={handleReviewText}
+
+        <SearchComp
+          handleSearchText={handleSearchText}
+          searchText={searchText}
         />
+        <GameOfTheDay games={games} />
+        <div className="grid grid-cols-3 gap-4">
+          {games.map((game) => {
+            //{shuffledGames.map((game) => {
+            const lowerCaseGameName = game.gameName.toLowerCase();
+            if (lowerCaseGameName.includes(searchText.toLowerCase()))
+              return (
+                <GameCard
+                  key={game.id}
+                  handleLike={handleLike}
+                  game={game}
+                  reviewText={reviewText}
+                  isReviewing={isReviewing}
+                  handleReviewButton={handleReviewButton}
+                  handleReviewText={handleReviewText}
+                />
+              );
+          })}
+        </div>
       </div>
     </>
   );
