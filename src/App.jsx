@@ -1,6 +1,5 @@
 import { MyEmojis } from "./components/myEmojis";
 import HomePage from "./pages/HomePage";
-import ExamplePage from "./pages/ExamplePage";
 import ItemPage from "./pages/ItemPage";
 import { BrowserRouter, Route, Routes, Link } from "react-router";
 import Page404 from "./pages/404Page";
@@ -39,6 +38,22 @@ export default function App() {
     setLikeCount(newLikeCount);
   }
 
+  function handleAddReview(id, reviewText) {
+    if (!reviewText.trim()) return;
+    let updatedGame = null;
+    const newGamesWithReviews = allGames.map((game) => {
+      if (game.id === id) {
+        const updatedReviews = [...game.gameReviews, reviewText.trim()];
+        updatedGame = { ...game, gameReviews: updatedReviews };
+        return updatedGame;
+      }
+      return game;
+    });
+    setAllGames(newGamesWithReviews);
+    saveGamesToLS(newGamesWithReviews);
+    return updatedGame;
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -55,7 +70,11 @@ export default function App() {
           <Route
             path="/"
             element={
-              <HomePage games={allGames} handleLike={handleLikeWithCount} />
+              <HomePage
+                games={allGames}
+                handleLike={handleLikeWithCount}
+                onReviewSubmit={handleAddReview}
+              />
             }
           />
           <Route
@@ -66,7 +85,6 @@ export default function App() {
           />
 
           <Route path="/item/:id" element={<ItemPage />} />
-          <Route path="/example" element={<ExamplePage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/emojis" element={<MyEmojis />} />
         </Routes>
