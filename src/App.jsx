@@ -36,9 +36,9 @@ export default function App() {
       }
       return count;
     }, 0);
-    console.log(newLikeCount);
     setLikeCount(newLikeCount);
   }
+
   return (
     <>
       <BrowserRouter>
