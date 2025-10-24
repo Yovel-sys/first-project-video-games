@@ -5,25 +5,49 @@ import Header from "../components/Header";
 import SearchComp from "../components/SearchComp";
 import gamePlaceLogo1 from "../assets/gamePlaceLogo1.png";
 import GameOfTheDay from "../components/GameOfTheDay";
+import GameFullPage from "../components/GameFullPage";
 
-export default function HomePage({ games, handleLike }) {
-  // const [shuffledGames] = useState(() =>
-  //   games.slice().sort(() => Math.random() - 0.5)
-  // );
+export default function HomePage({ games, handleLike, onReviewSubmit }) {
+  const [searchText, setSearchText] = useState("");
+  const [selectedGame, setSelectedGame] = useState(null);
+
   const [reviewText, setReviewText] = useState("");
   function handleReviewText(event) {
     setReviewText(event.target.value);
   }
+
+  function handleReviewSubmitRefresh(id, text) {
+    const updatedGame = onReviewSubmit(id, text);
+    setReviewText("");
+    if (updatedGame) {
+      setSelectedGame(updatedGame);
+    }
+  }
+
   const [isReviewing, setIsReviewing] = useState(false);
   function handleReviewButton() {
     setIsReviewing((reviewing) => !reviewing);
   }
-  const [searchText, setSearchText] = useState("");
+
   function handleSearchText(event) {
     setSearchText(event.target.value);
-    console.log(searchText);
   }
 
+  const [isFullPageOpen, setIsFullPageOpen] = useState(false);
+  const openFullPage = (game) => {
+    setIsFullPageOpen(true);
+    setSelectedGame(game);
+  };
+  const closeFullPage = () => setIsFullPageOpen(false);
+  function handleGamesLike(id) {
+    handleLike(id);
+    if (selectedGame && selectedGame.id === id) {
+      setSelectedGame((prevSelectedGame) => ({
+        ...prevSelectedGame,
+        isLiked: !prevSelectedGame.isLiked,
+      }));
+    }
+  }
   return (
     <>
       <div className="w-screen">
@@ -34,26 +58,33 @@ export default function HomePage({ games, handleLike }) {
           }
           image={gamePlaceLogo1}
         />
+        <GameFullPage
+          isOpen={isFullPageOpen}
+          onClose={closeFullPage}
+          game={selectedGame}
+          handleLike={handleGamesLike}
+          games={games}
+          onReviewSubmit={handleReviewSubmitRefresh}
+          reviewText={reviewText}
+          handleReviewText={handleReviewText}
+        />
 
         <SearchComp
           handleSearchText={handleSearchText}
           searchText={searchText}
         />
         <GameOfTheDay games={games} />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-wrap justify-center p-3">
           {games.map((game) => {
-            //{shuffledGames.map((game) => {
             const lowerCaseGameName = game.gameName.toLowerCase();
             if (lowerCaseGameName.includes(searchText.toLowerCase()))
               return (
                 <GameCard
+                  className="w-full sm:w-[calc(45%-1rem)] lg:w-[calc(30%-1rem)]"
                   key={game.id}
-                  handleLike={handleLike}
+                  handleLike={handleGamesLike}
                   game={game}
-                  reviewText={reviewText}
-                  isReviewing={isReviewing}
-                  handleReviewButton={handleReviewButton}
-                  handleReviewText={handleReviewText}
+                  openFullPage={openFullPage}
                 />
               );
           })}

@@ -1,23 +1,11 @@
 import { MyEmojis } from "./components/myEmojis";
 import HomePage from "./pages/HomePage";
-import ExamplePage from "./pages/ExamplePage";
 import ItemPage from "./pages/ItemPage";
 import { BrowserRouter, Route, Routes, Link } from "react-router";
 import Page404 from "./pages/404Page";
 import MyLibrary from "./pages/MyLibrary";
-import { games } from "./data";
 import { useState } from "react";
-
-const initialAllGAmes = () => {
-  const gamesFromLS = localStorage.getItem("allMyGames");
-  if (gamesFromLS) {
-    return JSON.parse(gamesFromLS);
-  }
-  return games;
-};
-const saveGamesToLS = (gm) => {
-  localStorage.setItem("allMyGames", JSON.stringify(gm));
-};
+import { initialAllGAmes, saveGamesToLS } from "./initialGames";
 
 export default function App() {
   const [allGames, setAllGames] = useState(initialAllGAmes());
@@ -49,6 +37,23 @@ export default function App() {
     }, 0);
     setLikeCount(newLikeCount);
   }
+
+  function handleAddReview(id, reviewText) {
+    if (!reviewText.trim()) return;
+    let updatedGame = null;
+    const newGamesWithReviews = allGames.map((game) => {
+      if (game.id === id) {
+        const updatedReviews = [...game.gameReviews, reviewText.trim()];
+        updatedGame = { ...game, gameReviews: updatedReviews };
+        return updatedGame;
+      }
+      return game;
+    });
+    setAllGames(newGamesWithReviews);
+    saveGamesToLS(newGamesWithReviews);
+    return updatedGame;
+  }
+
   return (
     <>
       <BrowserRouter>
@@ -65,7 +70,11 @@ export default function App() {
           <Route
             path="/"
             element={
-              <HomePage games={allGames} handleLike={handleLikeWithCount} />
+              <HomePage
+                games={allGames}
+                handleLike={handleLikeWithCount}
+                onReviewSubmit={handleAddReview}
+              />
             }
           />
           <Route
@@ -76,7 +85,6 @@ export default function App() {
           />
 
           <Route path="/item/:id" element={<ItemPage />} />
-          <Route path="/example" element={<ExamplePage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/emojis" element={<MyEmojis />} />
         </Routes>
