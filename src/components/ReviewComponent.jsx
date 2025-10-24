@@ -8,6 +8,12 @@ export default function ReviewComponent({
     onReviewSubmit(game.id, reviewText);
   }
 
+  function handleEnterDown(event) {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  }
+
   return (
     <>
       <input
@@ -16,6 +22,7 @@ export default function ReviewComponent({
         placeholder="Write your review here"
         value={reviewText}
         onChange={handleReviewText}
+        onKeyDown={handleEnterDown}
       />
       <div className="mt-3 mb-3">
         <button onClick={handleSubmit}>Add a Review</button>
