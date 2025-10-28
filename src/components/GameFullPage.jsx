@@ -6,7 +6,6 @@ export default function GameFullPage({
   isOpen,
   onClose,
   game,
-  games,
   handleLike,
   onReviewSubmit,
   reviewText,
@@ -50,7 +49,6 @@ export default function GameFullPage({
         </div>
         <ReviewComponent
           game={game}
-          games={games}
           onReviewSubmit={onReviewSubmit}
           reviewText={reviewText}
           handleReviewText={handleReviewText}

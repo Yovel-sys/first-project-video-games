@@ -24,11 +24,6 @@ export default function HomePage({ games, handleLike, onReviewSubmit }) {
     }
   }
 
-  const [isReviewing, setIsReviewing] = useState(false);
-  function handleReviewButton() {
-    setIsReviewing((reviewing) => !reviewing);
-  }
-
   function handleSearchText(event) {
     setSearchText(event.target.value);
   }
@@ -63,7 +58,6 @@ export default function HomePage({ games, handleLike, onReviewSubmit }) {
           onClose={closeFullPage}
           game={selectedGame}
           handleLike={handleGamesLike}
-          games={games}
           onReviewSubmit={handleReviewSubmitRefresh}
           reviewText={reviewText}
           handleReviewText={handleReviewText}
