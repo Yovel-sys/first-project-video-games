@@ -1,12 +1,12 @@
 import { games } from "./data";
 
-export const initialAllGAmes = () => {
+export const initializeGames = () => {
   const gamesFromLS = localStorage.getItem("allMyGames");
   if (gamesFromLS) {
     return JSON.parse(gamesFromLS);
   }
   return games;
 };
-export const saveGamesToLS = (gm) => {
+export const saveGames = (gm) => {
   localStorage.setItem("allMyGames", JSON.stringify(gm));
 };

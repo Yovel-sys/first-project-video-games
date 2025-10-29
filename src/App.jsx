@@ -3,10 +3,10 @@ import Page404 from "./pages/404Page";
 import MyLibrary from "./pages/MyLibrary";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router";
-import { initialAllGAmes, saveGamesToLS } from "./initialGames";
+import { initializeGames, saveGames } from "./utils/gamesLocalStorage";
 
 export default function App() {
-  const [allGames, setAllGames] = useState(initialAllGAmes());
+  const [allGames, setAllGames] = useState(initializeGames());
 
   const likeCount = allGames.reduce(
     (count, game) => (game.isLiked ? count + 1 : count),
@@ -21,7 +21,7 @@ export default function App() {
       return game;
     });
     setAllGames(newLikedGames);
-    saveGamesToLS(newLikedGames);
+    saveGames(newLikedGames);
   }
 
   function handleAddReview(id, reviewText) {
@@ -36,7 +36,7 @@ export default function App() {
       return game;
     });
     setAllGames(newGamesWithReviews);
-    saveGamesToLS(newGamesWithReviews);
+    saveGames(newGamesWithReviews);
     return updatedGame;
   }
 

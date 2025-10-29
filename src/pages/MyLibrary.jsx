@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import GameCard from "../components/GameCard";
+import Header from "../components/base-components/Header";
+import GameCard from "../components/game-components/GameCard";
 
 export default function MyLibrary({ games, handleLike }) {
   return (

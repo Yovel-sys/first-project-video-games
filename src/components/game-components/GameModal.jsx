@@ -1,8 +1,8 @@
-import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
-import LikeButton from "./LikeButton";
-import ReviewComponent from "./ReviewComponent";
+import gameImagePlaceolder from "../../assets/gameImagePlaceholder.png";
+import LikeButton from "../base-components/LikeButton";
+import ReviewComponent from "../base-components/ReviewComponent";
 
-export default function GameFullPage({
+export default function GameModal({
   isOpen,
   onClose,
   game,
