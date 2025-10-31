@@ -1,12 +1,11 @@
-import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
-import LikeButton from "./LikeButton";
-import ReviewComponent from "./ReviewComponent";
+import gameImagePlaceolder from "../../assets/gameImagePlaceholder.png";
+import LikeButton from "../base-components/LikeButton";
+import ReviewComponent from "../base-components/ReviewComponent";
 
-export default function GameFullPage({
+export default function GameModal({
   isOpen,
   onClose,
   game,
-  games,
   handleLike,
   onReviewSubmit,
   reviewText,
@@ -24,9 +23,9 @@ export default function GameFullPage({
         className="bg-gray-200 rounded-2xl m-2 p-2"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center border-b pb-3 mb-3">
+        <div className="relative flex justify-between items-center border-b pb-3 mb-3">
           <button
-            className=" text-gray-500 hover:text-gray-800 text-2xl"
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl"
             onClick={onClose}
           >
             &times;
@@ -50,7 +49,6 @@ export default function GameFullPage({
         </div>
         <ReviewComponent
           game={game}
-          games={games}
           onReviewSubmit={onReviewSubmit}
           reviewText={reviewText}
           handleReviewText={handleReviewText}

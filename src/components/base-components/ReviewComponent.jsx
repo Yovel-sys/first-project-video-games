@@ -4,10 +4,6 @@ export default function ReviewComponent({
   reviewText,
   handleReviewText,
 }) {
-  function handleSubmit() {
-    onReviewSubmit(game.id, reviewText);
-  }
-
   return (
     <>
       <input
@@ -18,7 +14,9 @@ export default function ReviewComponent({
         onChange={handleReviewText}
       />
       <div className="mt-3 mb-3">
-        <button onClick={handleSubmit}>Add a Review</button>
+        <button onClick={() => onReviewSubmit(game.id, reviewText)}>
+          Add a Review
+        </button>
       </div>
       <div id="reviewBoard">
         {game.gameReviews.map((review, index) => (

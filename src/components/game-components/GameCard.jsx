@@ -1,18 +1,12 @@
-import LikeButton from "./LikeButton";
-import gameImagePlaceolder from "../assets/gameImagePlaceholder.png";
-import { useState } from "react";
+import LikeButton from "../base-components/LikeButton";
+import gameImagePlaceolder from "../../assets/gameImagePlaceholder.png";
 
-export default function GameCard({
-  handleLike,
-  game,
-  className,
-  openFullPage,
-}) {
+export default function GameCard({ handleLike, game, className, openModal }) {
   return (
     <div
       id={game.id}
       className={`h-90 w-100 !bg-gray-400 !opacity-90 border-4 p-3 pb-10 m-2 rounded-2xl ${className}`}
-      onClick={() => openFullPage(game)}
+      onClick={() => openModal(game)}
     >
       <div>
         <div className="flex items-start flex-grow mb-4">

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "../app.css";
-import GameCard from "../components/GameCard";
-import Header from "../components/Header";
-import SearchComp from "../components/SearchComp";
+import GameCard from "../components/game-components/GameCard";
+import Header from "../components/base-components/Header";
+import SearchComp from "../components/base-components/SearchComp";
 import gamePlaceLogo1 from "../assets/gamePlaceLogo1.png";
-import GameOfTheDay from "../components/GameOfTheDay";
-import GameFullPage from "../components/GameFullPage";
+import GameOfTheDay from "../components/game-components/GameOfTheDay";
+import GameModal from "../components/game-components/GameModal";
 
 export default function HomePage({ games, handleLike, onReviewSubmit }) {
   const [searchText, setSearchText] = useState("");
@@ -24,21 +24,16 @@ export default function HomePage({ games, handleLike, onReviewSubmit }) {
     }
   }
 
-  const [isReviewing, setIsReviewing] = useState(false);
-  function handleReviewButton() {
-    setIsReviewing((reviewing) => !reviewing);
-  }
-
   function handleSearchText(event) {
     setSearchText(event.target.value);
   }
 
-  const [isFullPageOpen, setIsFullPageOpen] = useState(false);
-  const openFullPage = (game) => {
-    setIsFullPageOpen(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (game) => {
+    setIsModalOpen(true);
     setSelectedGame(game);
   };
-  const closeFullPage = () => setIsFullPageOpen(false);
+  const closeModal = () => setIsModalOpen(false);
   function handleGamesLike(id) {
     handleLike(id);
     if (selectedGame && selectedGame.id === id) {
@@ -58,12 +53,11 @@ export default function HomePage({ games, handleLike, onReviewSubmit }) {
           }
           image={gamePlaceLogo1}
         />
-        <GameFullPage
-          isOpen={isFullPageOpen}
-          onClose={closeFullPage}
+        <GameModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
           game={selectedGame}
           handleLike={handleGamesLike}
-          games={games}
           onReviewSubmit={handleReviewSubmitRefresh}
           reviewText={reviewText}
           handleReviewText={handleReviewText}
@@ -84,7 +78,7 @@ export default function HomePage({ games, handleLike, onReviewSubmit }) {
                   key={game.id}
                   handleLike={handleGamesLike}
                   game={game}
-                  openFullPage={openFullPage}
+                  openModal={openModal}
                 />
               );
           })}
